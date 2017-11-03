@@ -33,7 +33,7 @@ class App extends Component {
                   <h2 className="subtitle">
                     <UserInput
                       change={this.handleChangeUsername}
-                      input={this.state.username}
+                      input={this.state.username} 
                     />
                   </h2>
                 </div>
