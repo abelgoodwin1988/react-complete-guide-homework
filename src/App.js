@@ -38,7 +38,7 @@ class App extends Component {
         inputValues.map((value,index) => {
           return <CharComponent
             value={value}
-            click={(event) => this.deleteInputValueHandler(index)}
+            click={() => this.deleteInputValueHandler(index)}
             key={index} />
         });
     }
@@ -50,7 +50,7 @@ class App extends Component {
           <input
             className="input is-info"
             onChange={(event) => this.changeInput(event)}
-            value={this.state.inputValue}>
+            value={this.state.inputValue ? this.state.inputValue : ''}>
 
           </input>
           <p>length: {inputLength} </p>
