@@ -1,17 +1,17 @@
 import React from 'react';
 
-const charComponentStyle = {
-  display: 'inline-block',
-  padding: '16px',
-  textAlign: 'center',
-  margin: '16px',
-  border: '1px solid black'
-}
-
 const CharComponent = (props) => {
   return (
-    <div style={charComponentStyle}>
-      {props.value}
+    <div className="column is-2">
+      <div className="card">
+        <div className="card-content">
+          <div className="columns">
+            <div className="column">
+              <p className="title" onClick={props.click}>{props.value}</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

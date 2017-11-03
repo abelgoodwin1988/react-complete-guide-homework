@@ -6,7 +6,7 @@ import 'bulma/css/bulma.css';
 
 class App extends Component {
   state = {
-    inputValue: 'Input Value!'
+    inputValue: null
   }
 
   changeInput = (event) => {
@@ -14,16 +14,32 @@ class App extends Component {
     this.setState({inputValue:newValue});
   }
 
+  deleteInputValueHandler = (inputIndex) => {
+    const newState = this.state.inputValue.split('');
+    newState.splice(inputIndex,1);
+    let rejoinedState = newState.join('');
+    this.setState({inputValue:rejoinedState});
+  }
+
   render() {
 
-    let inputValues = this.state.inputValue.split('');
+    let inputValues = null;
+    let inputLength = null;
+    if (this.state.inputValue) {
+      inputValues = this.state.inputValue.split('');
+      inputLength = this.state.inputValue.length;
+    }
+
     let outputValues = null;
     // console.log(inputValues);
 
     if (inputValues) {
       outputValues =
-        inputValues.map((value) => {
-          return <CharComponent value={value} />
+        inputValues.map((value,index) => {
+          return <CharComponent
+            value={value}
+            click={(event) => this.deleteInputValueHandler(index)}
+            key={index} />
         });
     }
     // console.log(outputValues);
@@ -31,14 +47,21 @@ class App extends Component {
     return (
       <div className="App">
         <div className="section">
-          <input onChange={(event) => this.changeInput(event)} value={this.state.inputValue}>
+          <input
+            className="input is-info"
+            onChange={(event) => this.changeInput(event)}
+            value={this.state.inputValue}>
 
           </input>
-          <p>length: {this.state.inputValue.length}</p>
+          <p>length: {inputLength} </p>
           <ValidationComponent
-            inputValue={this.state.inputValue.length}
+            inputValue= {inputLength}
           />
-          {outputValues}
+          <div className="section">
+            <div className="columns is-multiline">
+              {outputValues}
+            </div>
+          </div>
         </div>
 
         <section className="section">
