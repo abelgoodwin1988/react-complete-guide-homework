@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import ValidationComponent from './components/ValidationComponent.js';
+import CharComponent from './components/CharComponent';
 import 'bulma/css/bulma.css';
 
 
@@ -13,6 +15,19 @@ class App extends Component {
   }
 
   render() {
+
+    let inputValues = this.state.inputValue.split('');
+    let outputValues = null;
+    // console.log(inputValues);
+
+    if (inputValues) {
+      outputValues =
+        inputValues.map((value) => {
+          return <CharComponent value={value} />
+        });
+    }
+    // console.log(outputValues);
+
     return (
       <div className="App">
         <div className="section">
@@ -20,6 +35,10 @@ class App extends Component {
 
           </input>
           <p>length: {this.state.inputValue.length}</p>
+          <ValidationComponent
+            inputValue={this.state.inputValue.length}
+          />
+          {outputValues}
         </div>
 
         <section className="section">
